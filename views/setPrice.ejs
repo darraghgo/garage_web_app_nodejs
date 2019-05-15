@@ -1,0 +1,95 @@
+<html>
+    
+     <!--        links to header,footer and css folders/modules-->
+<% include partials/header.ejs %> 
+<% include css/css.ejs %> 
+<% include partials/footer.ejs %>
+    
+             <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    
+<!--    script to autocomplete the list of products for the admin to change-->
+    
+              <script>
+  $( function() {
+    var availableTags = [
+          
+ "labour",
+"oil change",
+"wiper change",
+"basic service",
+"annual service",
+"repair",
+"major repair",
+"change tyres",
+"engine parts",
+"fuel injector",
+"fuel cap",
+"body panel",
+"bonnett",
+"window",
+"bumper",
+"grill",
+"ignition lead",
+"spark plugs",
+"alternator",
+"heater",
+"rad",
+"water pump",
+"rad hose",
+"fuel pump",
+"oil",
+"spray paint",
+"red paint",
+"silver paint",
+"black paint",
+"white paint",
+"air pump",
+"rotate tyres",
+"re thread",
+"head lamps",
+"oil filter",
+"fog lamp bulb",
+"rear light bulb",
+"reg light bulb",
+"clutch",
+"exhaust pipe",
+"wheel bearings",
+"hub caps",
+"wiper blades",
+"air filter",
+"timing belt",
+"batteries",
+"brake disc",
+"brake pad",
+"drive belt"
+       
+    ];
+    $( "#product" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+    
+    
+    <body>
+    <div>
+
+<!--             admin can change price of products here, they select product and enter new price in a submit form-->
+                     <div> 
+                        <form action="/setPrice" method="POST">
+				<input type="text" name="product" placeholder="product" id="product" >
+                <input type="text" name="price" placeholder="price" id="price" >
+                            
+				   <input type="submit">
+				
+			</form>
+                             </div>
+
+
+</div>
+        
+
+</body>
+</html>

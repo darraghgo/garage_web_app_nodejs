@@ -1,0 +1,384 @@
+<html>
+    <head>
+        
+<!--        links to header,footer and css folders/modules-->
+<% include partials/header.ejs %> 
+<% include css/css.ejs %> 
+<% include partials/footer.ejs %>
+        
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+
+        
+         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        
+<!--        function which counts the characters in the comments section and prevents user going over 255-->
+            <script>
+      function countChar(val) {
+        var len = val.value.length;
+        if (len >= 255) {
+          val.value = val.value.substring(0, 255);
+        } else {
+          $('#charNum').text(255 - len);
+        }
+      };
+    </script>
+        
+<!--       function which is used for the autocomplete, including a list of car models -->
+  <script>
+  $( function() {
+    var availableTags = [
+    
+"HYUNDAI",
+ "ABARTH",
+ "ALFA ROMEO",
+ "ASTON MARTIN",
+ "AUSTIN",
+ "BEDFORD",
+ "BENTLEY",
+ "BOLWELL",
+ "BUFORI",
+ "CADILLAC",
+"CATERHAM",
+ "CHERY",
+ "CHEVROLET",
+ "CHRYSLER",
+ "CITROEN",
+"DAEWOO",
+ "DAIHATSU",
+ "DODGE",
+ "FIAT",
+ "GEELY",
+ "GREAT WALL",
+"HINO",
+ "HUMMER",
+ "INFINITI",
+ "ISUZU",
+ "JAGUAR",
+ "JEEP",
+ "LAND ROVER",
+"LEXUS",
+ "LOTUS",
+ "MINI",
+ "MITSUBISHI",
+ "OPEL",
+ "other",
+ "PORSCHE",
+ "PROTON",
+ "RANGE ROVER",
+ "RENAULT",
+ "SAAB",
+ "SKODA",
+ "SSANGYONG",
+ "SUBARU",
+ "SUZUKI",
+ "TATA",
+ "VOLVO"
+        
+    ];
+    $( "#model" ).autocomplete({
+      source: availableTags
+    });
+  } );
+  </script>
+        
+       
+    
+        
+          <script>
+               /* retrieve date from database*/
+            
+    var badDates = [] // start with an empty array
+    
+function getTheDates(){
+//     retrieves dates from database
+        $.getJSON("/dates", function(data){
+           
+    
+    for (var i = 0, len = data.length; i < len; i++) {
+        
+		 badDates.push(data[i].date);
+    }
+            
+
+   
+    
+});               
+      };
+              
+              //function to have a calender to select dates appear
+   
+$(function() {
+            $( "#pickdate" ).datepicker({
+                dateFormat: 'yy-mm-dd',
+                
+             
+                beforeShowDay: disableDate
+            
+                
+                });
+
+    });
+              
+           
+   
+   
+              
+             //this disables sundays and specific dates    
+    function disableDate(myDate){      
+    
+    var $return=true;
+    var $returnclass ="available";
+         var day = myDate.getDay();
+       var $return = day != 0; //this disables sundays by adding second condition to return
+         
+
+    $checkdate = $.datepicker.formatDate('yy-mm-dd', myDate);
+    for(var i = 0; i < badDates.length; i++)
+        {    
+             if(badDates[i] == $checkdate )
+          
+              {
+            $return = false;
+            $returnclass= "unavailable";
+                   
+            }  
+        }
+        
+    return [$return,$returnclass];
+         
+    }
+              
+      
+     
+ 
+ </script>  
+    
+    <style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+    
+    
+    </head>
+<!--    calls function to load the date picker automatically-->
+    
+<body onload="getTheDates()">
+    
+    <div>
+    
+    
+        
+        
+        <h2> Booking </h2>
+        
+     
+    
+    
+    
+    </div>
+    
+<!--    form to be posted containing booking details-->
+    <div class="container">
+        
+  <form action="/makeBooking" method="POST">
+  <div class="row">
+    <div class="col-25">
+      <label for="first_name">First Name</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="fname" name="fname" placeholder="Your name..">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="lname">Last Name</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="lname" name="lname" placeholder="Your last name..">
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="lname">Email</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="email" name="email" placeholder="Email">
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="password">Password</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="password" name="password" placeholder="password">
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="phone">Contact Number: </label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="phone" name="phone" placeholder="Contact number">
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="vechile">Vechile Type</label>
+    </div>
+    <div class="col-75">
+<!--                        gives user a selection opition-->
+                      <select id="vechile" name="vechile">
+        <option value="" disabled selected>Select vechile type</option>
+        <option value="car">Car</option>
+        <option value="motorbike">motorbike</option>
+        <option value="van">Van</option>
+        <option value="small van">Small Van</option>
+        <option value="bus">Bus</option>
+        <option value="small bus">Small Bus</option>
+        <option value="truck">Truck</option>
+      </select>
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="model">Model</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="model" name="model" placeholder="Model Type">
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="licence">Licence Type</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="licence" name="licence" placeholder="Licence">
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="engine">Engine type</label>
+    </div>
+    <div class="col-75">
+     
+              <select id="engine" name="engine">
+        <option value="" disabled selected>Select engine type</option>
+        <option value="diesel">Diesel</option>
+        <option value="petrol">Petrol</option>
+        <option value="hybrid">Hybrid</option>
+        <option value="electric">Electric</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="booking">Service Type</label>
+    </div>
+    <div class="col-75">
+      <select id="booking" name="booking">
+        <option value="" disabled selected>Select your booking type</option>
+        <option value="annual service">Annual Service</option>
+        <option value="major service">Major Service</option>
+        <option value="repair">Repair</option>
+        <option value="major repair">Major Repair</option>
+      </select>
+    </div>
+  </div>
+        <div class="row">
+    <div class="col-25">
+      <label for="country">Select Date</label>
+    </div>
+    <div class="col-75">
+ <input type="text" id="pickdate" name = "pickdate"  autocomplete="off">
+    </div>
+  </div>
+      
+  <div class="row">
+    <div class="col-25">
+      <label for="comments">Description</label>
+    </div>
+    <div class="col-75">
+      <textarea id="comments" onkeyup="countChar(this)" name="comments" placeholder="Please give a brief description.." style="height:200px"></textarea>
+        <div id="charNum"></div>
+    </div>
+       
+  </div>
+  <div class="row">
+    <input type="submit" value="Submit">
+  </div>
+  </form>
+</div>
+    
+   
+    
+    <br>
+    
+    </body>
+
+
+</html>

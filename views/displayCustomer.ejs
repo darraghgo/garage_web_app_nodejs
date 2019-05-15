@@ -1,0 +1,33 @@
+<html>
+    
+    links to header,footer and css files
+<% include partials/header.ejs %> 
+<% include css/css.ejs %> 
+<% include partials/footer.ejs %>
+    <body>
+    <div>
+
+
+<!--   when customer logins in this is the page they see which displays their details-->
+    
+    <div class="table-wrapper">
+        <% if (customer) {%>
+        
+        <h2> Hi <%= customer.fname %></h2>
+        <p>  Last Name :  <%= customer.lname %></p>
+         <p>  Booking type :  <%= customer.booking %></p>
+         <p>  When :  <%= customer.date %></p>
+        
+        <p>  Vechile :  <%= customer.vechile %></p>
+        <p>  Model :  <%= customer.model %></p>
+        
+        
+        
+<!--             if no customer object recieved the below message is displayed-->
+        <% } else { %>
+            <p class="text-center">Not found. Go <a href="/login" >here</a> to try again.</p>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<html>
+<% include partials/header.ejs %> 
+<% include css/css.ejs %> 
+<% include partials/footer.ejs %>
+    
+    <style>
+        
+        .bill1 {
+  -webkit-columns: 100px 3; /* Chrome, Safari, Opera */
+  -moz-columns: 100px 3; /* Firefox */
+  columns: 100px 3;
+}
+            p del {
+   display: none;
+}
+    
+    </style>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+                    <script>
+$('p').each(function() {
+   var $this = $(this);
+   $this.html($this.text().replace(/\bquick\b/g, '<del>undefined</del>'));
+});
+</script>
+    <body>
+    <div >
+
+<!--message is used to send error if not retireved-->
+<div class="container">
+    <% if (message) { %>
+        <p class="text-center text-danger"><%= message %></p>
+    <% } %>
+
+    <% if (customer) { %>
+    
+    <h3> <u>Invoice</u></h3>
+        
+           <p> Booking Number : <%= customer.bookNo %></p>
+        <br>
+        <div class = "bill1">
+
+<!--  displays costs assigned to customers bill-->
+            
+<p>labour €<%= customer.labour %></p>            
+<p> oil change €<%= customer.oil_change %></p>
+<p>wiper change €<%= customer.wiper_change  %></p>
+<p>basic service €<%= customer.basic_service %></p>
+<p>annual service €<%= customer.annual_service %></p>
+<p>repair €<%= customer.repair%></p>
+<p>major repair €<%= customer.major_repair%></p>
+<p>change tyres €<%= customer.change_tyres%></p>
+<p>engine parts €<%= customer.engine_parts%></p>
+<p>fuel injector €<%= customer.fuel_injector%></p>
+<p>fuel cap €<%= customer.fuel_cap%></p>
+<p>body panel €<%= customer.body_panel%></p>
+<p id=>bonnett €<%= customer.bonnett%></p>
+<p>window €<%= customer.window%></p>
+<p>bumper €<%= customer.bumper%></p>
+<p>grill €<%= customer.grill%></p>
+<p>ignition lead €<%= customer.ignition_lead%></p>
+<p>spark plugs €<%= customer.spark_plugs%></p>
+<p>alternator €<%= customer.alternator%></p>
+<p>heater €<%= customer.heater%></p>
+<p>rad €<%= customer.rad%></p>
+<p>water pump €<%= customer.water_pump%></p>
+<p>rad hose €<%= customer.rad_hose%></p>
+<p>fuel pump €<%= customer.fuel_pump%></p>
+<p>oil €<%= customer.oil%></p>
+<p>spray paint €<%= customer.spray_paint%></p>
+<p>red paint €<%= customer.red_paint%></p>
+<p>silver paint €<%= customer.silver_paint%></p>
+<p>black paint €<%= customer.black_paint%></p>
+<p>white paint €<%= customer.white_paint%></p>
+<p>air pump €<%= customer.air_pump%></p>
+<p>rotate tyres €<%= customer.rotate_tyres%></p>
+<p>re thread €<%= customer.rethread%></p>
+<p>head lamps €<%= customer.head_lamps%></p>
+<p>oil filter €<%= customer.oil_filter%></p>
+<p>fog lamp bulb €<%= customer.fog_lamp_bulb%></p>
+<p>rear light bulb €<%= customer.rearlight_bulb%></p>
+<p>reg light bulb €<%= customer.reg_light_bulb%></p>
+<p>clutch €<%= customer.clutch%></p>
+<p>exhaust pipe €<%= customer.exhaust_pipe%></p>
+<p>wheel bearings €<%= customer.wheel_bearings%></p>
+<p>hub caps €<%= customer.hub_caps%></p>
+<p>wiper blades €<%= customer.wiper_blades%></p>
+<p>air filter €<%= customer.air_filter%></p>
+<p>timing belt €<%= customer.timing_belt%></p>
+<p>batteries €<%= customer.batteries%></p>
+<p>brake disc €<%= customer.brake_disc%></p>
+<p > brake pad €<%= customer.brake_pad%></p>
+<p>  drive belt €<%= customer.drive_belt%></p>
+            
+ 
+
+
+
+
+    
+       </div>     
+            
+    <h3> <u>Total: €<%= customer.total %></u></h3> 
+     
+    
+ 
+    </div>
+   
+    
+    
+       
+  
+
+
+    
+    
+  
+
+     
+                                        <div class="col-75">
+               
+        <% for(var i=0; i < customer.length; i++) { %>
+    <p><%= customer[i].price[i] %>"><%= customer[i].product %></p><br>
+<% } %>
+     
+   
+     
+    </div>
+
+
+<!--        if customer object not recieved this text is displayed-->
+    <% } else { %>
+        <p class="text-center">No invoice Found. </p>
+    <% } %>
+</div>
+
+        <br>
+           
+ 
+        
+        
+<!--                calls print script-->
+           
+               <button onclick="printBill()">Print invoice</button>
+        
+        <p> Payment on collection of vechile </p>
+        
+        <br>
+<!--print page function-->
+<script>
+function printBill() {
+  window.print();
+}
+</script> 
+         
+ 
+        <br>
+        
+
+        
+        
+<br>
+
+
+        
+</body>
+</html>

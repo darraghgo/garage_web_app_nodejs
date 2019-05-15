@@ -1,0 +1,132 @@
+
+
+
+<html>
+<% include partials/header.ejs %> 
+<% include css/css.ejs %> 
+<% include partials/footer.ejs %> 
+  
+    
+    <style>
+    .stick-to-right {
+        width: 250px;
+        float: right;
+      
+    }
+          tr:nth-child(even) {background-color: #f2f2f2;}
+</style>
+    <body>
+<!--   makes a request in the form of a post to get the schedule-->
+    <div>
+<a href="/admin"  rel="noopener" class="btn btn-md btn-info"> All</a> 
+<a href="/today"  rel="noopener" class="btn btn-md btn-info"> Today</a>
+<a href="/tomorrow"  rel="noopener" class="btn btn-md btn-info"> Tomorrow</a>
+<a href="/week"   rel="noopener" class="btn btn-md btn-info"> Next Seven Days</a>
+        <a onclick="printSchedule()"  class="stick-to-right btn btn-md btn-info">Print Schedule</a>
+         <a href="/setPrice"  class="stick-to-right btn btn-md btn-success">Change Prices</a>
+        <br>
+      
+<!--    table for displaying index-->
+        
+<!--        if the customer object is larger than 0 then the details are displayed-->
+    <div class="table-wrapper">
+        <% if (customers.length > 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Booking Number</th>
+                       
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Booking</th>
+                        <th scope="col">Phone Number</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Mechanic</th>
+                        <th scope="col">Assign Mechanic</th>                    
+                        <th scope="col">Status</th>
+                        <th scope="col">Set Status</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+<!--    Loops through the customer index and  retireves info on each customer-->
+                <tbody>
+                    <% customers.forEach((customer, index) => { %>
+                        <tr>
+                            <th scope="row"><%= customer.bookNo %></th>
+                            
+                            <td><%= customer.fname %></td>
+                            <td><%= customer.lname %></td>
+                            <td><%= customer.booking %></td>
+                            <td><%= customer.phone %></td>
+                            <td><%= customer.date %></td>
+                            
+                            <td><%= customer.employee %></td>
+                            
+       <!--                   below is a form to assign the mechanic-->
+                            <td>
+                                <form action="/applyEmp/<%= customer.bookNo %>" method="POST">
+                              <select name="employee" >
+    <option value="employee" disabled selected>select employee </option>
+    <option value="Chief" id = "employee">Chief</option>
+    <option value="John" id = "employee">John</option>
+    <option value="Mary" id = "employee">Mary</option>
+    <option value="Mike" id = "employee">Mike</option>
+  </select>
+                                <input type="submit">
+                                </form>
+                                 </td>
+                            <!--        below is a form to set the status-->
+                            <td><%= customer.STATUS %></td>
+                                                        <td>
+                                <form action="/setStatus/<%= customer.bookNo %>" method="POST">
+                              <select name="status" >
+    <option value="status" disabled selected>set status </option>
+    <option value="In Service" id = "status">In Service</option>
+    <option value="Fixed" id = "status">Fixed</option>
+    <option value="Collected" id = "status">Collected</option>
+    <option value="Scrapped" id = "status">Scrapped</option>
+  </select>
+                                <input type="submit">
+                                </form>
+                                 </td>
+                          
+                            
+                            
+    <!--    link to take user to edit booking page or view bill, link also used to request a customer is deleted-->
+                            <td> <a href="/editBooking/<%= customer.bookNo %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit/View Booking</a>
+                            <a href="/bill/<%= customer.bookNo %>" target="_blank" rel="noopener" class="btn btn-md btn-info"> Bill</a>
+                                
+                                 <a href="/remove/<%= customer.bookNo %>" class="btn btn-sm btn-danger">Delete</a>
+                                
+                             
+                              
+                            </td> 
+                            <td>
+                            
+                                                     
+                            
+                            </td>
+                             
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        
+     <br>
+        <br>
+        <br>
+<!--  script to print the page-->
+<script>
+function printSchedule() {
+  window.print();
+}
+</script> 
+        <% } else { %>
+            <p class="text-center">No customer found. Go <a href="/add" >here</a> to add customer.</p>
+        <% } %>
+    </div>
+</div>
+        
+      
+</body>
+</html>

@@ -1,0 +1,248 @@
+<html>
+<% include partials/header.ejs %> 
+<% include css/css.ejs %> 
+<% include partials/footer.ejs %>
+    <body>
+    <div>
+
+<p>  <%= customer.price %></p>
+
+<div class="container">
+    <% if (message) { %>
+        <p class="text-center text-danger"><%= message %></p>
+    <% } %>
+
+    <% if (customer) { %>
+        <form class="edit-customer-form" action="" method="post" enctype="multipart/form-data">
+            <button type="submit" class="btn btn-success float-right">Update Booking</button>
+            <table border="1">
+                <tr>
+                    
+            <div class="form-row">
+                                <div class="form-group col-md-4">
+                    <label for="bookNo"> Booking Number</label>
+                    <input type="text" class="form-control" name="bookNo" id="bookNo" value="<%= customer[0].bookNo %>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="fname">First Name</label>
+                    <input type="text" class="form-control" name="fname" id="fname" value="<%= customer[0].fname %>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="lname">Last Name</label>
+                    <input type="text" class="form-control" name="lname" id="lname" value="<%= customer[0].lname %>" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="booking">Booking</label>
+                    <input type="text" class="form-control" name="booking" id="booking" value="<%= customer[0].booking %>" required >
+                </div>
+                
+                 
+            
+               
+                    <div class="col-75">
+     
+<!--    these checkboxes retrieve the price and product from the costs table-->
+         
+                         <tr>
+   <td><input type="checkbox" name="price0" value="<%= customer[0].price %>"><%= customer[0].product %> €<%= customer[0].price %><br></td>
+  <td><input type="checkbox" name="price1" value="<%= customer[1].price %>"><%= customer[1].product %> €<%= customer[1].price %><br></td>
+                             
+                          
+  <td><input type="checkbox" name="price2" value="<%= customer[2].price %>"><%= customer[2].product %> €<%= customer[2].price %><br></td>
+ <td> <input type="checkbox" name="price3" value="<%= customer[3].price %>"><%= customer[3].product %>4 €<%= customer[3].price %><br></td>
+                        </tr>   
+                        <td><br><b>Service Items</b>  </td>
+    <tr> 
+   <td><input type="checkbox" name="price4" value="<%= customer[4].price %>"><%= customer[4].product %> €<%= customer[4].price %><br></td>
+ <td> <input type="checkbox" name="price5" value="<%= customer[5].price %>"><%= customer[5].product %> €<%= customer[5].price %><br></td>
+  <td><input type="checkbox" name="price6" value="<%= customer[6].price %>"><%= customer[6].product %> €<%= customer[6].price %><br></td>
+  <td><input type="checkbox" name="price7" value="<%= customer[7].price %>"><%= customer[7].product %>8 €<%= customer[7].price %><br></td>
+ <td> <input type="checkbox" name="price8" value="<%= customer[8].price %>"><%= customer[8].product %> €<%= customer[8].price %><br></td>
+  </tr>
+                        
+    <tr> 
+   <td><input type="checkbox" name="price9" value="<%= customer[9].price %>"><%= customer[9].product %>10 €<%= customer[9].price %><br></td>
+ <td> <input type="checkbox" name="price10" value="<%= customer[10].price %>"><%= customer[10].product %> €<%= customer[10].price %><br></td>
+  <td><input type="checkbox" name="price11" value="<%= customer[11].price %>"><%= customer[11].product %>12 €<%= customer[11].price %><br></td>
+  <td><input type="checkbox" name="price12" value="<%= customer[12].price %>"><%= customer[12].product %> €<%= customer[12].price %><br></td>
+ <td> <input type="checkbox" name="price13" value="<%= customer[13].price %>"><%= customer[13].product %>14 €<%= customer[13].price %><br></td>
+  </tr>
+                        
+     <tr> 
+   <td><input type="checkbox" name="price14" value="<%= customer[14].price %>"><%= customer[14].product %> €<%= customer[14].price %><br></td>
+ <td> <input type="checkbox" name="price15" value="<%= customer[15].price %>"><%= customer[15].product %>16 €<%= customer[15].price %><br></td>
+  <td><input type="checkbox" name="price16" value="<%= customer[16].price %>"><%= customer[16].product %>17 €<%= customer[16].price %><br></td>
+ 
+
+  </tr>   
+        <td><br><b>Repair Items</b><br> </td>           
+                        
+                        
+                            <tr> 
+   <td><input type="checkbox" name="price17" value="<%= customer[17].price %>"><%= customer[17].product %>17 €<%= customer[17].price %><br></td>
+ <td> <input type="checkbox" name="price18" value="<%= customer[18].price %>"><%= customer[18].product %> €<%= customer[18].price %><br></td>
+  <td><input type="checkbox" name="price19" value="<%= customer[19].price %>"><%= customer[19].product %> €<%= customer[19].price %><br></td>
+  <td><input type="checkbox" name="price20" value="<%= customer[20].price %>"><%= customer[20].product %> €<%= customer[20].price %><br></td>
+ <td> <input type="checkbox" name="price21" value="<%= customer[21].price %>"><%= customer[21].product %>14 €<%= customer[21].price %><br></td>
+  </tr>
+                       
+                        
+     <tr> 
+   <td><input type="checkbox" name="price22" value="<%= customer[22].price %>"><%= customer[22].product %> €<%= customer[22].price %><br></td>
+ <td> <input type="checkbox" name="price23" value="<%= customer[23].price %>"><%= customer[23].product %>16 €<%= customer[23].price %><br></td>
+  <td><input type="checkbox" name="price24" value="<%= customer[24].price %>"><%= customer[24].product %>17 €<%= customer[24].price %><br></td>
+ 
+
+  </tr>
+                        <td><br> </td>
+                        
+                                                    <tr> 
+   <td><input type="checkbox" name="price25" value="<%= customer[25].price %>"><%= customer[25].product %>10 €<%= customer[25].price %>
+       <br></td>
+ <td> <input type="checkbox" name="price26" value="<%= customer[26].price %>"><%= customer[26].product %> €<%= customer[26].price %><br></td>
+  <td><input type="checkbox" name="price27" value="<%= customer[27].price %>"><%= customer[27].product %>12 €<%= customer[27].price %><br></td>
+  <td><input type="checkbox" name="price28" value="<%= customer[28].price %>"><%= customer[28].product %> €<%= customer[28].price %><br></td>
+ <td> <input type="checkbox" name="price29" value="<%= customer[29].price %>"><%= customer[29].product %>14 €<%= customer[29].price %><br></td>
+  </tr>
+                        
+     <tr> 
+   <td><input type="checkbox" name="price30" value="<%= customer[30].price %>"><%= customer[30].product %> €<%= customer[30].price %><br></td>
+ <td> <input type="checkbox" name="price31" value="<%= customer[31].price %>"><%= customer[31].product %>16 €<%= customer[31].price %><br></td>
+  <td><input type="checkbox" name="price32" value="<%= customer[32].price %>"><%= customer[32].product %>17 €<%= customer[32].price %><br></td>
+ 
+  </tr>
+                       <td><br><b>Miscellaneous Items</b><br> </td> 
+                        
+                                                    <tr> 
+   <td><input type="checkbox" name="price33" value="<%= customer[33].price %>"><%= customer[33].product %>10 €<%= customer[33].price %><br></td>
+ <td> <input type="checkbox" name="price34" value="<%= customer[34].price %>"><%= customer[34].product %> €<%= customer[34].price %><br></td>
+  <td><input type="checkbox" name="price35" value="<%= customer[35].price %>"><%= customer[35].product %>12 €<%= customer[35].price %><br></td>
+  <td><input type="checkbox" name="price36" value="<%= customer[36].price %>"><%= customer[36].product %> €<%= customer[36].price %><br></td>
+ <td> <input type="checkbox" name="price37" value="<%= customer[37].price %>"><%= customer[37].product %>14 €<%= customer[37].price %><br></td>
+  </tr>
+     <tr> 
+   <td><input type="checkbox" name="price38" value="<%= customer[38].price %>"><%= customer[38].product %> €<%= customer[38].price %><br></td>
+ <td> <input type="checkbox" name="price39" value="<%= customer[39].price %>"><%= customer[39].product %> €<%= customer[39].price %><br></td>
+  <td><input type="checkbox" name="price40" value="<%= customer[40].price %>"><%= customer[40].product %> €<%= customer[40].price %><br></td>
+ <td><input type="checkbox" name="price41" value="<%= customer[41].price %>"><%= customer[41].product %> €<%= customer[41].price %><br></td>
+ <td><input type="checkbox" name="price42" value="<%= customer[42].price %>"><%= customer[42].product %> €<%= customer[42].price %><br></td>
+ 
+  <td><input type="checkbox" name="price43" value="<%= customer[43].price %>"><%= customer[43].product %> €<%= customer[43].price %><br></td>
+  <td><input type="checkbox" name="price44" value="<%= customer[44].price %>"><%= customer[44].product %> €<%= customer[44].price %><br></td>
+         
+<!--         here to prevent undefined values being entered into database-->
+         
+         <input type="hidden" name="price0" value="0">
+         <input type="hidden" name="price1" value="0">
+         <input type="hidden" name="price2" value="0">
+         <input type="hidden" name="price3" value="0">
+         <input type="hidden" name="price4" value="0">
+         <input type="hidden" name="price5" value="0">
+         <input type="hidden" name="price6" value="0">
+         <input type="hidden" name="price7" value="0">
+         <input type="hidden" name="price8" value="0">
+         <input type="hidden" name="price9" value="0">
+         <input type="hidden" name="price10" value="0">
+         <input type="hidden" name="price11" value="0">
+         <input type="hidden" name="price12" value="0">
+         <input type="hidden" name="price13" value="0">
+         <input type="hidden" name="price14" value="0">
+         <input type="hidden" name="price15" value="0">
+         <input type="hidden" name="price16" value="0">
+         <input type="hidden" name="price17" value="0">
+         <input type="hidden" name="price18" value="0">
+         <input type="hidden" name="price19" value="0">
+         <input type="hidden" name="price20" value="0">
+         <input type="hidden" name="price21" value="0">
+         <input type="hidden" name="price22" value="0">
+         <input type="hidden" name="price23" value="0">
+         <input type="hidden" name="price24" value="0">
+         <input type="hidden" name="price25" value="0">
+         <input type="hidden" name="price26" value="0">
+         <input type="hidden" name="price27" value="0">
+         <input type="hidden" name="price28" value="0">
+         <input type="hidden" name="price29" value="0">
+         <input type="hidden" name="price30" value="0">
+         <input type="hidden" name="price31" value="0">
+         <input type="hidden" name="price32" value="0">
+         <input type="hidden" name="price33" value="0">
+         <input type="hidden" name="price34" value="0">
+         <input type="hidden" name="price35" value="0">
+         <input type="hidden" name="price36" value="0">
+         <input type="hidden" name="price37" value="0">
+         <input type="hidden" name="price38" value="0">
+         <input type="hidden" name="price39" value="0">
+         <input type="hidden" name="price40" value="0">
+         <input type="hidden" name="price41" value="0">
+         <input type="hidden" name="price42" value="0">
+         <input type="hidden" name="price43" value="0">
+         <input type="hidden" name="price44" value="0">
+         <input type="hidden" name="price45" value="0">
+         <input type="hidden" name="price46" value="0">
+         <input type="hidden" name="price47" value="0">
+         <input type="hidden" name="price48" value="0">
+         <input type="hidden" name="price49" value="0">
+ 
+      <td>
+<!--                experiement with different way of assigning costs, having option means default is zero instead of undefined-->
+              <select id="price45" name="price45">
+        <option value="0"><%= customer[45].product %> </option>
+        <option value="<%= customer[45].price %>"><%= customer[45].product %> €<%= customer[45].price %></option>
+ 
+      </select>
+    </td>
+ 
+ 
+
+  </tr>
+    </div>
+              
+
+            </div>
+                    
+                 
+                        
+            <div class="form-row">
+                
+               
+            
+            </div>
+                    </tr>
+            </table>
+            
+            <br>
+            
+<!--            displays customer details-->
+            
+                          <div class="form-group col-md-4">
+                    
+                            <h2> Customer Details</h2>
+                
+        <p> Booking Number :  <%= customer[0].bookNo %></p>        
+         <p>  First Name :  <%= customer[0].fname %></p>
+        <p>  Last Name :  <%= customer[0].lname %></p>
+         <p>  Booking type :  <%= customer[0].booking %></p>
+         <p>  When :  <%= customer[0].date %></p>
+        <p> Contact Number :  <%= customer[0].phone %></p>
+        <p>  Vechile :  <%= customer[0].vechile %></p>
+        <p>  Model :  <%= customer[0].model %></p>
+                
+        <p>Comments: </p>
+                <p><%= customer[0].comments %></p>
+                </div>
+            
+            <div>
+            
+
+            
+            </div>
+            <button type="submit" class="btn btn-success float-right">Update Booking</button>
+        </form>
+        <a href='/admin'> Return to Admin</a>
+    <% } else { %>
+        <p class="text-center">Customer Not Found. Go <a href="/add">here</a> to add customer.</p>
+    <% } %>
+</div>
+</div>
+</body>
+</html>
